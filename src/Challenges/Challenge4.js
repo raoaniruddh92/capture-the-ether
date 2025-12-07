@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { deploy_contract } from './Challenge1helpers/deploy';
-import { interact } from './Challenge1helpers/interact';
+import { deploy_contract } from './Challenge4helpers/deploy';
+import { interact } from './Challenge4helpers/interact';
 import { SEPOLIA_CHAIN_ID } from '../config';
 import { onboard } from '../config';
 import './cyberpunk.css';
@@ -91,7 +91,7 @@ useEffect(() => {
       <div className="terminal-scroll">
 
     <div className="terminal-wrapper">
-      <h2 className="terminal-header">🧠 GhostLedger — Level 1</h2>
+      <h2 className="terminal-header">🧠 GhostLedger — Level 4</h2>
 <div className="challenge-list">
       <div className="terminal-card">
         {!isConnected ? (

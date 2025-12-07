@@ -7,7 +7,7 @@ function Home() {
       <div className="scan-lines"></div>
 
       <h1 className="title">GhostLedger</h1>
-      <p className="subtitle">Initiate connection to access the smart contract missions...</p>
+      <p className="subtitle">Blockchain security challenges</p>
 
       <Link to="/challenges">
         <button className="enter-btn">ENTER CHALLENGES</button>
