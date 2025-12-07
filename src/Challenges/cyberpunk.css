@@ -103,3 +103,24 @@ body {
   color: #00ffe5;
   text-shadow: 0 0 6px #00ffe5;
 }
+pre {
+  max-height: 350px;       /* limit height */
+  overflow-y: auto;        /* enable vertical scrolling */
+  overflow-x: auto;        /* allow horizontal scroll if needed */
+  padding: 12px;
+  background: rgba(0,0,0,0.6);
+  border-radius: 6px;
+  white-space: pre-wrap;   /* or keep "pre" if you don't want wrapping */
+}
+pre::-webkit-scrollbar {
+  width: 8px;
+}
+
+pre::-webkit-scrollbar-thumb {
+  background: #00eaff;
+  border-radius: 4px;
+}
+
+pre::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.1);
+}
