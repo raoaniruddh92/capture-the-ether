@@ -9,7 +9,7 @@ function Challenges() {
         <h2>Intro challenges</h2>
         <div className="terminal-card">
           <h3>Challenge 1</h3>
-          <p>Solve the first vulnerability and complete the task.</p>
+          <p>Deploy a contract</p>
           <Link to="/challenge1" className="cy-button">
             ▶ Start Challenge 1
           </Link>

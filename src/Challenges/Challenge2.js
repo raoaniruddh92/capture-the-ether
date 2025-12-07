@@ -12,14 +12,15 @@ function Challenges2() {
   const [solutionStatus, setSolutionStatus] = useState(null);
   const [deployNotification, setDeployNotification] = useState(null);
 
-  const connect = async () => {
-    const wallets = await onboard.connectWallet();
-    if (wallets[0]) {
-      setWallet(wallets[0]);
-      const SEPOLIA_CHAIN_ID_HEX = `0x${SEPOLIA_CHAIN_ID.toString(16)}`;
-      await onboard.setChain({ chainId: SEPOLIA_CHAIN_ID_HEX });
-    }
-  };
+const connect = async () => {
+  const wallets = await onboard.connectWallet();
+  if (wallets[0]) {
+    setWallet(wallets[0]);
+    window.localStorage.setItem('connectedWallets', wallets[0].label); // <—
+    const SEPOLIA_CHAIN_ID_HEX = `0x${SEPOLIA_CHAIN_ID.toString(16)}`;
+    await onboard.setChain({ chainId: SEPOLIA_CHAIN_ID_HEX });
+  }
+};
 
   const handleDeploy = async () => {
     setIsProcessing(true);
@@ -52,12 +53,19 @@ function Challenges2() {
     }
   };
 
-  useEffect(() => {
-    const sub = onboard.state.select('wallets').subscribe((wallets) => {
-      setWallet(wallets[0] || null);
-    });
-    return () => sub.unsubscribe();
-  }, []);
+useEffect(() => {
+  const sub = onboard.state.select('wallets').subscribe((wallets) => {
+    setWallet(wallets[0] || null);
+  });
+
+  // 🔥 Auto reconnect previously connected wallet
+  const previouslyConnected = window.localStorage.getItem('connectedWallets');
+  if (previouslyConnected) {
+    onboard.connectWallet({ autoSelect: { label: previouslyConnected, disableModals: true } });
+  }
+
+  return () => sub.unsubscribe();
+}, []);
 
   return (
     <div className="terminal-wrapper">
