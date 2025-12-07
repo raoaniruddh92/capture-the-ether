@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.section {
+  height: 40vh;           /* full window height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+/* First part - blue */
+.blue {
+  background: #0a5cff;     /* cyber blue */
+  color: white;
+}
+
+/* Second part - white */
+.white {
+  background: white;
+  color: #0a5cff;
+}

@@ -1,0 +1,105 @@
+/* Background */
+body {
+  background: #000;
+  font-family: "Share Tech Mono", monospace;
+  color: #00ffea;
+}
+
+/* Matrix Flicker */
+.terminal-wrapper {
+  padding: 30px;
+  max-width: 850px;
+  margin: auto;
+  animation: bgPulse 7s infinite alternate;
+}
+@keyframes bgPulse {
+  0% { box-shadow: inset 0 0 40px #0ff2; }
+  100% { box-shadow: inset 0 0 60px #0ff5; }
+}
+
+/* Heading */
+.terminal-header {
+  text-align: center;
+  font-size: 30px;
+  color: #00eaff;
+  text-shadow: 0 0 10px #00eaff;
+  margin-bottom: 20px;
+}
+
+/* Data Cards */
+.terminal-card {
+  border: 1px solid #0ff;
+  background: rgba(0, 255, 255, 0.06);
+  padding: 18px;
+  margin: 20px 0;
+  box-shadow: 0 0 15px #00fff966;
+}
+
+/* Neon Button */
+.cy-button {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  margin-top: 15px;
+  font-size: 16px;
+  color: #000;
+  background: #00ffe5;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.16s;
+}
+.cy-button:hover {
+  background: #00fff6;
+  box-shadow: 0 0 10px #00fff6;
+}
+.cy-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.cy-button.small {
+  width: auto;
+  margin-top: 10px;
+}
+
+/* Console Notifications */
+.console-box {
+  padding: 10px;
+  margin-top: 15px;
+  border-left: 3px solid;
+  white-space: pre-wrap;
+  background: rgba(0, 255, 255, 0.08);
+}
+.console-box.pending { border-color: yellow; color: yellow; }
+.console-box.success { border-color: #00ff9d; color: #00ff9d; }
+.console-box.error { border-color: #ff0059; color: #ff0059; }
+
+/* Scan Results */
+.success-scan {
+  color: #00ff9d;
+  border: 1px solid #00ff9d;
+  padding: 10px;
+  margin-top: 12px;
+  text-align: center;
+  animation: flicker 0.08s infinite;
+}
+.error-scan {
+  color: #ff0059;
+  border: 1px solid #ff0059;
+  padding: 10px;
+  margin-top: 12px;
+  text-align: center;
+  animation: flicker 0.08s infinite;
+}
+
+@keyframes flicker {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+/* Neon inline highlight */
+.neon {
+  color: #00ffe5;
+  text-shadow: 0 0 6px #00ffe5;
+}
