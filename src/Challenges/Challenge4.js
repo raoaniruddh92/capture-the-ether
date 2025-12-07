@@ -88,6 +88,8 @@ useEffect(() => {
 
 
   return (
+      <div className="terminal-scroll">
+
     <div className="terminal-wrapper">
       <h2 className="terminal-header">🧠 GhostLedger — Level 1</h2>
 
@@ -176,6 +178,7 @@ contract GuessTheSecretNumberChallenge {
           )}
         </div>
       )}
+      </div>
     </div>
   );
 }
