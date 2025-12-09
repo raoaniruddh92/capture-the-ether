@@ -1,7 +1,7 @@
 import { Challenges9abi as abi, Challenges9bytecode as bytecode } from "../abi";
 import { BrowserProvider, ContractFactory, parseEther } from "ethers";
 
-export async function deploy_contract() {
+export async function deploy_contract(challenger_address) {
     if (!window.ethereum) {
         throw new Error("MetaMask or other Ethereum provider not found.");
     }
@@ -13,7 +13,7 @@ export async function deploy_contract() {
     const factory = new ContractFactory(abi, bytecode, signer);
     console.log("Attempting to deploy contract...");
     try{
-    const contract = await factory.deploy({ value: parseEther("0.01") });
+    const contract = await factory.deploy(challenger_address,{ value: parseEther("0.1") });
 
     console.log("Deployment transaction sent. Waiting for confirmation...");
     await contract.waitForDeployment();

@@ -39,7 +39,7 @@ function Challenges8() {
     setContractAddress(null);
 
     try {
-      const address = await deploy_contract();
+      const address = await deploy_contract(wallet.accounts[0].address);
       setContractAddress(address);
       setDeployNotification({ message: `⚡ Deployment Success → ${address}`, type: 'success' });
     } catch {
@@ -106,7 +106,7 @@ function Challenges8() {
   return (
     <div className="terminal-scroll">
       <div className="terminal-wrapper">
-        <h2 className="terminal-header">🧠 GhostLedger — Level 7</h2>
+        <h2 className="terminal-header">🧠 GhostLedger — Level 8</h2>
         <div className="challenge-list">
           <div className="terminal-card">
             {!isConnected ? (
