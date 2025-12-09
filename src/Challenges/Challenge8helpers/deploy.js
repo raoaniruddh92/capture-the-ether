@@ -1,5 +1,5 @@
 import { Challenges8abi as abi, Challenges8bytecode as bytecode } from "../abi";
-import { BrowserProvider, ContractFactory, parseEther } from "ethers";
+import { BrowserProvider, ContractFactory } from "ethers";
 
 export async function deploy_contract() {
     if (!window.ethereum) {

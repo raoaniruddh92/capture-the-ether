@@ -1,4 +1,4 @@
-import { Challenges1abi as abi, Challenges1bytecode as bytecode } from "../abi";
+import { Challenges1abi as abi, } from "../abi";
 import { BrowserProvider } from "ethers";
 const { ethers } = require("ethers");
 
@@ -11,7 +11,7 @@ export async function  interact(address){
     const signer = await provider.getSigner();  
     const contract = new ethers.Contract(address, abi, signer);    
     const result = await contract.isComplete();
-    if (result==true){
+    if (result===true){
         return true;
     }else{
         return false;
