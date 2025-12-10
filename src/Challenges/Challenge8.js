@@ -108,6 +108,8 @@ function Challenges8() {
       <div className="terminal-wrapper">
         <h2 className="terminal-header">🧠 GhostLedger — Level 8</h2>
         <div className="challenge-list">
+          {!isConnected ? (
+
           <div className="terminal-card">
             {!isConnected ? (
               <>
@@ -119,13 +121,11 @@ function Challenges8() {
                 <p className="terminal-text">
                   🟢 Connected → {wallet.accounts[0].address}
                 </p>
-                <button className="cy-button small" onClick={disconnect}>
-                  ❌ DISCONNECT
-                </button>
               </>
             )}
           </div>
-
+          ):( (<></>)  
+        )}
           <div className="terminal-card">
             <h3 className="sub-header">⚔ Mission Objective</h3>
             <p>

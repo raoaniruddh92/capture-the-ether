@@ -109,24 +109,27 @@ function Challenges4() {
     <div className="terminal-wrapper">
       <h2 className="terminal-header">🧠 GhostLedger — Level 4</h2>
 <div className="challenge-list">
-      <div className="terminal-card">
-        {!isConnected ? (
-          <>
-            <p className="terminal-text">🔻 STATUS: Wallet not connected.</p>
-            <button className="cy-button" onClick={connect}>CONNECT WALLET</button>
-          </>
-        ) : (
-          <>
-            <p className="terminal-text">
-              🟢 Connected → {wallet.accounts[0].address}
-            </p>
-            <button className="cy-button small" onClick={disconnect}>
-              ❌ DISCONNECT
-            </button>
-          </>
-        )}
-      </div>
+ {!isConnected ? (
 
+          <div className="terminal-card">
+            {!isConnected ? (
+              <>
+                <p className="terminal-text">🔻 STATUS: Wallet not connected.</p>
+                <button className="cy-button" onClick={connect}>CONNECT WALLET</button>
+              </>
+            ) : (
+              <>
+                <p className="terminal-text">
+                  🟢 Connected → {wallet.accounts[0].address}
+                </p>
+                <button className="cy-button small" onClick={disconnect}>
+                  ❌ DISCONNECT
+                </button>
+              </>
+            )}
+          </div>
+          ):( (<></>)  
+        )}
       <div className="terminal-card">
         <h3 className="sub-header">⚔ Mission Objective</h3>
         <p>

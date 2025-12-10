@@ -108,6 +108,8 @@ function Challenges1() {
       <div className="terminal-wrapper">
         <h2 className="terminal-header">🧠 GhostLedger — Level 1</h2>
         <div className="challenge-list">
+          {!isConnected ? (
+
           <div className="terminal-card">
             {!isConnected ? (
               <>
@@ -125,7 +127,8 @@ function Challenges1() {
               </>
             )}
           </div>
-
+          ):( (<></>)  
+        )}
           <div className="terminal-card">
             <h3 className="sub-header">⚔ Mission Objective</h3>
 <p>
