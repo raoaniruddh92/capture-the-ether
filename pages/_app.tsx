@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app'
 import { Web3OnboardProvider, init } from '@web3-onboard/react'
 import metamaskSDK from '@web3-onboard/metamask'
 import ChainWrapper from './ChainWrapper'
+
 const metamaskSDKWallet = metamaskSDK({
   options: {
     extensionOnly: true, // Set to true if you ONLY want the browser extension

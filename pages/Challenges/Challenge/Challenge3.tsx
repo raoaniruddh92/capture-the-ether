@@ -3,12 +3,12 @@
 import { useRef, useState, useEffect } from "react";
 import { useConnectWallet, useNotifications } from "@web3-onboard/react";
 import { useRouter } from "next/router";
-import { Challenges1abi as abi, Challenges1bytecode as bytecode} from "../../../utils/abi";
+import { Challenges3abi as abi, Challenges3bytecode as bytecode} from "../../../utils/abi";
 import { publicClient } from "@/utils/client";
 import { createWalletClient, custom } from "viem";
 import { sepolia } from "viem/chains";
 
-const STORAGE_KEY = "challenge1_contract_address";
+const STORAGE_KEY = "challenge3_contract_address";
 
 export default function Challenge1() {
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
@@ -112,11 +112,21 @@ export default function Challenge1() {
 
       const [account] = await walletClient.getAddresses();
 
-      const hash = await walletClient.deployContract({
-        abi: abi,
-        account,
-        bytecode: bytecode as `0x${string}`,
-      });
+const feeData = await publicClient.estimateFeesPerGas();
+
+const maxFeePerGas =
+  (feeData.maxFeePerGas! * BigInt(130)) / BigInt(100);
+
+const maxPriorityFeePerGas =
+  (feeData.maxPriorityFeePerGas! * BigInt(130)) / BigInt(100);
+
+const hash = await walletClient.deployContract({
+  abi,
+  account,
+  bytecode: bytecode as `0x${string}`,
+  maxFeePerGas,
+  maxPriorityFeePerGas,
+});
 
       notifyController.current = customNotification({
         type: "pending",
@@ -131,8 +141,32 @@ export default function Challenge1() {
       }
 
       setAddress(receipt.contractAddress);
+     const contractAddress = receipt.contractAddress;
 
-      notifyController.current.update({
+ await new Promise((resolve) => setTimeout(resolve, 5_000));
+
+    // --- 4. Call verification API ---
+    const res = await fetch("/api/verify2", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ address: contractAddress }),
+    });
+
+    if (!res.ok) {
+      throw new Error(`Verification request failed (${res.status})`);
+    }
+
+    const data = await res.json();
+
+    if (!data.success) {
+      console.warn("Contract verification failed:", data);
+      notifyController.current?.update({
+        type: "warning",
+        message: "Contract deployed, but verification failed.",
+        autoDismiss: 6000,
+      });
+    }
+    notifyController.current.update({
         type: "success",
         message: "Contract deployed successfully!",
         autoDismiss: 5000,
@@ -159,19 +193,31 @@ export default function Challenge1() {
         {connecting ? "Connecting..." : wallet ? "Disconnect" : "Connect"}
       </button>
 
-      <h1>Challenge 1</h1>
+      <h1>Challenge 3</h1>
 
       <h2>Mission Objective</h2>
-      <ol>
-        <li>Install MetaMask</li>
-        <li>Switch to the Sepolia test network</li>
-        <li>Get some Sepolia ETH</li>
-      </ol>
+      <p>Send some ether to this address to continue(Sepolia)</p>
+<p>Your contract code</p>
+<pre className="bg-gray-900 text-green-300 p-4 rounded">
+{`// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.13;
 
-      <p>
-        After you’ve received test ETH, click deploy to deploy the challenge
-        contract. You don’t need to interact with the contract — just deploy it.
-      </p>
+contract Challenge {
+    address public immutable TARGET = 0x5007ac414Fd733ecE18AA057598969370921CA4A;
+
+    uint256 public immutable STARTING_BALANCE;
+
+    constructor() {
+        STARTING_BALANCE = address(TARGET).balance;
+    }
+
+    function isSolved() external view returns (bool) {
+        return TARGET.balance > STARTING_BALANCE + 0.001 ether;
+    }
+}
+            `}
+</pre>
+
 
       {/* Deploy button */}
       <button
