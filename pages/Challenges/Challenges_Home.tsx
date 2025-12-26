@@ -5,7 +5,7 @@ import { useConnectWallet } from '@web3-onboard/react'
 import { useSetChain } from '@web3-onboard/react'
 import { useRouter } from 'next/router'
 
-export default function Home() {
+export default function Challenge_Home() {
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet()
   const [address, setAddress] = useState<string | null>(null)
   const router = useRouter()
@@ -16,9 +16,10 @@ export default function Home() {
       <button disabled={connecting} onClick={() => (wallet ? disconnect(wallet) : connect())}>
         {connecting ? 'Connecting' : wallet ? 'Disconnect' : 'Connect'}
       </button>
+      <h1>This is the challenges home page</h1>
 
-      <button type="button" onClick={() => router.push('/Challenges/Challenges_Home')}>
-        Click me
+    <button type="button" onClick={() => router.push('/Challenges/Challenge/Challenge1')}>
+        Click me to go to challenge 1
       </button>
     </div>
   )
