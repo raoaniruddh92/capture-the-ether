@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import { useConnectWallet } from '@web3-onboard/react'
-import DeployContract from './blockchain_pages/deploycontract'
-import ReadHello from './blockchain_pages/readcontract'
 import { useSetChain } from '@web3-onboard/react'
 
 export default function Home() {
